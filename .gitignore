@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+__pycache__/
+migrations/
+*.pyc
+*.pyo
+connection.cnf
+restart
+passenger_wsgi.py
+tmp/
