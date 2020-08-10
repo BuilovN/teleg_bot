@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="sec-padding">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="sp-cart">
+                        <tbody>
+                        <tr>
+                            <th style="width:18%">Telegram id</th>
+                            <th style="width:18%;">Username</th>
+                            <th style="width:18%;">First Name</th>
+                            <th style="width:18%;">Last Name</th>
+                            <th style="width:18%;">Register date</th>
+                            <th style="width:18%;">Is subscribed</th>
+                            <th style="width:18%;"></th>
+                        </tr>
+
+                        {% for user in users %}
+                            <tr>
+                                <td class="pro-title" style="text-align:center"><a href="/author/{{ author.username }}/">
+                                    <h6>{{ user.telegram_id }}</h6></a></td>
+                                <td class="pro-title" style="text-align:center"><a href="/author/{{ author.username }}/">
+                                    <h6>{{ user.username }}</h6></a></td>
+                                <td class="pro-title" style="text-align:center"><a href="/author/{{ author.username }}/">
+                                    <h6>{{ user.first_name }}</h6></a></td>
+                                <td class="pro-title" style="text-align:center"><p><a href="/author/{{ author.username }}/">
+                                    <h6>{{ user.last_name }}</h6></a></td>
+                                 <td class="pro-title" style="text-align:center"><p><a href="/author/{{ author.username }}/">
+                                    <h6>{{ user.registered_at }}</h6></a></td>
+                                 <td class="pro-title" style="text-align:center"><p><a href="/author/{{ author.username }}/">
+                                    <h6>{{ user.subscribed }}</h6></a></td>
+                                <td><a class="btn btn-green-dark btn-small" target="_blank"
+                                       href="https://t.me/{{ user.username}}">Связаться</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                <div class="col-divider-margin-3"></div>
+                    <div class="col-md-12 text-center">
+                        <ul class="pagination style-1 hover-violet">
+                            {% if users.has_previous %}
+                                <li><a href="/?page={{ 1 }}"><span aria-hidden="true"><i
+                                        class="fas fa-angle-double-left"></i></span></a>
+                                </li>
+                                <li><a href="/?page={{ users.previous_page_number }}"><span aria-hidden="true"><i
+                                        class="fas fa-angle-left"></i></span></a>
+                                </li>
+                            {% endif %}
+                            {% for num in pagination_list %}
+                                <li><a {% if users.number == num %}class="active"{% endif %}
+                                       href="/?page={{ num }}">{{ num }}</a></li>
+                            {% endfor %}
+                            {% if users.has_next %}
+                                <li><a href="/?page={{ users.next_page_number }}"><span aria-hidden="true"><i
+                                        class="fas fa-angle-right"></i></span></a>
+                                </li>
+                                <li><a href="/?page={{ users.paginator.num_pages }}"><span aria-hidden="true"><i
+                                        class="fas fa-angle-double-right"></i></span></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

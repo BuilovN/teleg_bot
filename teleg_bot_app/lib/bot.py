@@ -1,6 +1,8 @@
 import requests
 from teleg_bot_app.models import User
-
+from django.core.exceptions import ObjectDoesNotExist
+import random
+import string
 
 class Bot:
     def __init__(self, token):
@@ -30,20 +32,22 @@ class Bot:
         except KeyError:
             return
 
-        reply_markup = {}
-        user = User.objects.get(telegram_id=user_id)
-        if not user:
+        reply_markup = {
+            "inline_keyboard": [[{
+                "text": "Подписаться на новости",
+                "callback_data": "/subscribe"}]]
+        }
+
+        try:
+            user = User.objects.get(telegram_id=user_id)
+        except ObjectDoesNotExist:
             new_user = User(telegram_id=user_id, username=username, first_name=first_name, last_name=last_name)
             new_user.save()
             text = f"Привет {username}! Теперь ты зарегистрирован в нашем боте! Ура! "
         else:
             text = "Ты уже зарегистрирован!"
-            if not user.subscribed:
-                reply_markup = {
-                    "inline_keyboard": [[{
-                        "text": "Подписаться на новости",
-                        "callback_data": "/subscribe"}]]
-                }
+            if user.subscribed:
+                reply_markup = {}
 
         self.send_message(text, user_id, reply_markup)
 

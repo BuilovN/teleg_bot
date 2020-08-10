@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Админ панель{% endblock %}</title>
+
+    {% load static %}
+    <!-- Mobile view -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(61840354, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-163297483-1');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yesteryear" rel="stylesheet">
+
+    <!-- Template's stylesheets -->
+    <link rel="stylesheet" href="{% static 'blog/js/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/theme-default.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/corporate.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/shortcodes.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/css/shop.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/fonts/fontawesome/all.min.css' %}" type="text/css">
+    {% block extra_head %}
+    {% endblock extra_head %}
+
+    <link rel="stylesheet/less" href="{% static 'blog/less/skin.less' %}" type="text/css">
+
+</head>
+<body>
+<div class="wrapper-boxed">
+    <div class="site-wrapper">
+
+        {% block topbar %}
+            <section>
+                <div class="pagenation-holder">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6"><h4 class="uppercase">Админ панель</h4></div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock topbar %}
+
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+
+<script src="{% static 'blog/js/jquery/jquery.js' %}"></script>
+<script src="{% static 'blog/js/bootstrap/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'blog/js/less/less.min.js' %}" data-env="development"></script>
+
+
+<script src="{% static 'blog/fonts/fontawesome/all.min.js' %}"></script>
+</body>
+</html>
