@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.core.paginator import EmptyPage, PageNotAnInteger
-from teleg_bot_app.lib.bot import Bot
+from teleg_bot_app.lib.currency_bot import CurrencyBot
 from teleg_bot_app.lib.custom_paginator import CustomPaginator
 from .models import User
 
@@ -33,23 +33,24 @@ def index(request):
 
 @csrf_exempt
 def bot(request):
-    telegram_bot = Bot(TOKEN)
+    telegram_bot = CurrencyBot(TOKEN)
     if request.method == 'POST':
         request_body = json.loads(request.body)
+        print(request_body)
         try:
-            command = request_body["message"]["text"]
+            text = request_body["message"]["text"]
             user_data = request_body["message"]["from"]
         except KeyError:
             try:
-                command = request_body["callback_query"]["data"]
+                text = request_body["callback_query"]["data"]
                 user_data = request_body["callback_query"]["from"]
             except KeyError:
-                return HttpResponse(status=400)
-
-        if command in telegram_bot.commands_dict:
-            telegram_bot.commands_dict[command](user_data)
-        else:
-            telegram_bot.command_not_found(user_data)
+                return HttpResponse(status=204)
+        telegram_bot.run_command(text, user_data)
+        # if command in telegram_bot.commands_dict:
+        #     telegram_bot.commands_dict[command](user_data)
+        # else:
+        #     telegram_bot.command_not_found(user_data)
 
         return HttpResponse(status=204)
 

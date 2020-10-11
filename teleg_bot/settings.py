@@ -26,7 +26,7 @@ SECRET_KEY = '3wbb1c*y)z59qkleak-fx4+d1e7qvoh6jo+_a$_$4xz*z6dd_1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nebezdari.online', 'www.nebezdari.online', 'localhost', '2bbca9a1f482.ngrok.io']
+ALLOWED_HOSTS = ['nebezdari.online', 'www.nebezdari.online', 'localhost', 'c1efe69fd1ec.eu.ngrok.io']
 
 
 # Application definition
@@ -77,11 +77,8 @@ WSGI_APPLICATION = 'teleg_bot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': os.path.join(BASE_DIR, 'connection.cnf'),
-            'charset': 'utf8mb4'
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "users.db"
     }
 }
 
